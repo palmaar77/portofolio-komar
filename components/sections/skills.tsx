@@ -69,7 +69,7 @@ export function SkillsSection() {
         </div>
 
         {/* Category Filters */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+        <div className="mt-8 sm:mt-10 flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar py-2 -mx-4 px-4 sm:mx-0 sm:flex-wrap">
           {skillCategories.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
@@ -77,7 +77,7 @@ export function SkillsSection() {
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                className={`inline-flex items-center gap-2 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold shrink-0 transition-all duration-200 active:scale-95 ${
                   isSelected
                     ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md shadow-slate-900/20 dark:shadow-white/10 scale-105"
                     : "border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-slate-200"

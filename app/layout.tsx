@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { MobileDock } from "@/components/layout/mobile-dock";
 import { profileData } from "@/data/profile";
 import "./globals.css";
 
@@ -131,6 +132,7 @@ export default function RootLayout({
           <Navbar />
           <div className="flex-1">{children}</div>
           <Footer />
+          <MobileDock />
         </ThemeProvider>
       </body>
     </html>

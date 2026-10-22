@@ -20,6 +20,18 @@ export function ProjectsSection() {
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [activeModalProject, setActiveModalProject] = React.useState<ProjectItem | null>(null);
 
+  // Lock body scroll when project modal is open
+  React.useEffect(() => {
+    if (activeModalProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [activeModalProject]);
+
   // Filter projects based on category and search query
   const filteredProjects = React.useMemo(() => {
     return projectsData.filter((project) => {
@@ -75,9 +87,9 @@ export function ProjectsSection() {
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-8 sm:mt-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Category Tabs */}
-          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 -mx-4 px-4 md:mx-0 w-auto md:w-auto flex-nowrap md:flex-wrap">
             {projectCategories.map((cat) => {
               const isSelected = selectedCategory === cat.id;
               return (
@@ -85,7 +97,7 @@ export function ProjectsSection() {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  className={`px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold shrink-0 transition-all duration-200 active:scale-95 ${
                     isSelected
                       ? "bg-sky-500 text-white shadow-md shadow-sky-500/25"
                       : "border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-slate-200"
@@ -255,8 +267,8 @@ export function ProjectsSection() {
 
         {/* Modal for In-depth Project Details */}
         {activeModalProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
-            <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-2xl">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
+            <div className="relative w-full sm:max-w-2xl max-h-[92vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-2xl pb-safe">
               {/* Close Button */}
               <button
                 type="button"

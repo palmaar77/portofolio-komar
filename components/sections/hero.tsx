@@ -109,28 +109,28 @@ export function ProjectCard({ project }: ProjectProps) {
 
             {/* Main Name & Headline */}
             <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15] sm:leading-[1.1]">
                 Halo, saya{" "}
                 <span className="bg-gradient-to-r from-sky-500 via-indigo-500 to-cyan-400 bg-clip-text text-transparent">
                   {profileData.name}
                 </span>
               </h1>
-              <p className="text-xl sm:text-2xl font-bold text-slate-700 dark:text-slate-300">
+              <p className="text-lg sm:text-2xl font-bold text-slate-700 dark:text-slate-300">
                 {profileData.tagline}
               </p>
             </div>
 
             {/* Subheadline description */}
-            <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               {profileData.subheadline}
             </p>
 
             {/* CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-2.5 sm:gap-3.5">
               <a
                 href="#projects"
                 id="hero-view-projects-btn"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white shadow-lg shadow-sky-500/25 hover:shadow-sky-500/35 hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 rounded-2xl sm:rounded-xl text-sm font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white shadow-lg shadow-sky-500/25 active:scale-95 transition-all duration-200"
               >
                 <span>Lihat Proyek</span>
                 <ArrowRight className="w-4 h-4" />
@@ -139,7 +139,7 @@ export function ProjectCard({ project }: ProjectProps) {
               <a
                 href="#contact"
                 id="hero-contact-btn"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold border border-slate-300 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 rounded-2xl sm:rounded-xl text-sm font-semibold border border-slate-300 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 shadow-sm active:scale-95 transition-all duration-200"
               >
                 <span>Hubungi Saya</span>
               </a>
@@ -148,7 +148,7 @@ export function ProjectCard({ project }: ProjectProps) {
                 href={profileData.cvUrl}
                 download="CV-Komarudin-FullStack.pdf"
                 id="hero-download-cv-btn"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold border border-sky-500/30 dark:border-sky-500/20 bg-sky-50 dark:bg-sky-950/30 text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/40 hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:py-3 rounded-2xl sm:rounded-xl text-sm font-semibold border border-sky-500/30 dark:border-sky-500/20 bg-sky-50 dark:bg-sky-950/30 text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/40 active:scale-95 transition-all duration-200"
                 title="Download CV Komarudin (PDF)"
               >
                 <Download className="w-4 h-4 text-sky-500" />
@@ -231,10 +231,10 @@ export function ProjectCard({ project }: ProjectProps) {
                 </div>
 
                 {/* Architecture Tabs */}
-                <div className="flex border-b border-slate-800 bg-slate-950/40 px-2 text-[11px]">
+                <div className="flex border-b border-slate-800 bg-slate-950/40 px-2 text-[11px] overflow-x-auto no-scrollbar">
                   <button
                     onClick={() => setActiveCodeTab("api")}
-                    className={`flex items-center gap-1.5 px-3 py-2 border-b-2 font-medium transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-2 border-b-2 font-medium shrink-0 transition-colors ${
                       activeCodeTab === "api"
                         ? "border-sky-400 text-sky-400 bg-slate-800/40"
                         : "border-transparent text-slate-400 hover:text-slate-200"
@@ -245,7 +245,7 @@ export function ProjectCard({ project }: ProjectProps) {
                   </button>
                   <button
                     onClick={() => setActiveCodeTab("db")}
-                    className={`flex items-center gap-1.5 px-3 py-2 border-b-2 font-medium transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-2 border-b-2 font-medium shrink-0 transition-colors ${
                       activeCodeTab === "db"
                         ? "border-sky-400 text-sky-400 bg-slate-800/40"
                         : "border-transparent text-slate-400 hover:text-slate-200"
@@ -256,7 +256,7 @@ export function ProjectCard({ project }: ProjectProps) {
                   </button>
                   <button
                     onClick={() => setActiveCodeTab("client")}
-                    className={`flex items-center gap-1.5 px-3 py-2 border-b-2 font-medium transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-2 border-b-2 font-medium shrink-0 transition-colors ${
                       activeCodeTab === "client"
                         ? "border-sky-400 text-sky-400 bg-slate-800/40"
                         : "border-transparent text-slate-400 hover:text-slate-200"

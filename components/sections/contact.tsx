@@ -144,10 +144,10 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Direct Contact Info & Socials */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm space-y-6">
+            <div className="p-5 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm space-y-6">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                 Informasi Kontak Langsung
               </h3>
@@ -248,7 +248,7 @@ export function ContactSection() {
 
           {/* Right Column: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm">
+            <div className="p-5 sm:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm">
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 {/* Honeypot field for anti-spam */}
                 <input
@@ -261,7 +261,7 @@ export function ContactSection() {
                   autoComplete="off"
                 />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                   {/* Name field */}
                   <div className="space-y-1.5">
                     <label
@@ -279,7 +279,7 @@ export function ContactSection() {
                         if (formErrors.name) setFormErrors({ ...formErrors, name: "" });
                       }}
                       placeholder="Masukkan nama Anda"
-                      className={`w-full px-4 py-2.5 rounded-xl text-xs border ${
+                      className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
                         formErrors.name
                           ? "border-red-500 focus:ring-red-500"
                           : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
@@ -310,7 +310,7 @@ export function ContactSection() {
                         if (formErrors.email) setFormErrors({ ...formErrors, email: "" });
                       }}
                       placeholder="email@contoh.com"
-                      className={`w-full px-4 py-2.5 rounded-xl text-xs border ${
+                      className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
                         formErrors.email
                           ? "border-red-500 focus:ring-red-500"
                           : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
@@ -342,7 +342,7 @@ export function ContactSection() {
                       if (formErrors.subject) setFormErrors({ ...formErrors, subject: "" });
                     }}
                     placeholder="Contoh: Tawaran Proyek Website Sekolah / Kerja Sama"
-                    className={`w-full px-4 py-2.5 rounded-xl text-xs border ${
+                    className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
                       formErrors.subject
                         ? "border-red-500 focus:ring-red-500"
                         : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
@@ -373,7 +373,7 @@ export function ContactSection() {
                       if (formErrors.message) setFormErrors({ ...formErrors, message: "" });
                     }}
                     placeholder="Ceritakan detail proyek, spesifikasi fitur, atau pertanyaan Anda..."
-                    className={`w-full px-4 py-2.5 rounded-xl text-xs border ${
+                    className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
                       formErrors.message
                         ? "border-red-500 focus:ring-red-500"
                         : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"

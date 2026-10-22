@@ -6,11 +6,11 @@ import { GithubIcon, InstagramIcon } from "@/components/icons";
 import { profileData } from "@/data/profile";
 
 export function Footer() {
-  const [currentYear, setCurrentYear] = React.useState<number>(2026);
-
-  React.useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+  const currentYear = React.useSyncExternalStore(
+    () => () => {},
+    () => new Date().getFullYear(),
+    () => 2026
+  );
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -20,7 +20,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-slate-200 dark:border-slate-800/80 bg-white/50 dark:bg-slate-950/70 backdrop-blur-md pt-16 pb-12 overflow-hidden">
+    <footer className="relative border-t border-slate-200 dark:border-slate-800/80 bg-white/50 dark:bg-slate-950/70 backdrop-blur-md pt-14 sm:pt-16 pb-24 md:pb-12 pb-safe overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-sky-500/5 to-transparent blur-2xl pointer-events-none" />
 
