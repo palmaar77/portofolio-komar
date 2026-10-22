@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tasksBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#tasksBg)" />
+
+  <g transform="translate(60, 40)">
+    <rect width="680" height="420" rx="12" fill="#0b0f19" stroke="#334155" stroke-width="2" />
+    
+    <!-- Titlebar -->
+    <rect width="680" height="42" rx="12" fill="#1e293b" />
+    <rect y="30" width="680" height="12" fill="#1e293b" />
+    <circle cx="24" cy="21" r="6" fill="#ef4444" />
+    <circle cx="44" cy="21" r="6" fill="#f59e0b" />
+    <circle cx="64" cy="21" r="6" fill="#10b981" />
+    <text x="340" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">Agile Kanban Board & Task Manager</text>
+
+    <!-- 3 Kanban Columns -->
+    <!-- Col 1: To Do -->
+    <g transform="translate(25, 60)">
+      <rect width="195" height="330" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <circle cx="20" cy="22" r="5" fill="#f59e0b" />
+      <text x="35" y="26" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">TO DO (3)</text>
+
+      <!-- Task Card 1 -->
+      <rect x="12" y="45" width="171" height="80" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+      <rect x="22" y="58" width="55" height="16" rx="3" fill="#ef4444" fill-opacity="0.2" />
+      <text x="50" y="69" fill="#ef4444" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" text-anchor="middle">URGENT</text>
+      <text x="22" y="90" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Implement Auth Flow</text>
+      <text x="22" y="110" fill="#64748b" font-family="system-ui, sans-serif" font-size="9">Deadline: Besok</text>
+
+      <!-- Task Card 2 -->
+      <rect x="12" y="135" width="171" height="80" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+      <rect x="22" y="148" width="60" height="16" rx="3" fill="#38bdf8" fill-opacity="0.2" />
+      <text x="52" y="159" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" text-anchor="middle">FRONTEND</text>
+      <text x="22" y="180" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Dark Mode Toggle UI</text>
+      <text x="22" y="200" fill="#64748b" font-family="system-ui, sans-serif" font-size="9">Subtask 2/2</text>
+    </g>
+
+    <!-- Col 2: In Progress -->
+    <g transform="translate(242, 60)">
+      <rect width="195" height="330" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <circle cx="20" cy="22" r="5" fill="#38bdf8" />
+      <text x="35" y="26" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">IN PROGRESS (2)</text>
+
+      <!-- Task Card In Progress -->
+      <rect x="12" y="45" width="171" height="90" rx="6" fill="#0f172a" stroke="#0284c7" stroke-width="1" />
+      <rect x="22" y="58" width="60" height="16" rx="3" fill="#8b5cf6" fill-opacity="0.2" />
+      <text x="52" y="69" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" text-anchor="middle">DATABASE</text>
+      <text x="22" y="90" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Schema Migration v2</text>
+      <!-- Progress Bar -->
+      <rect x="22" y="105" width="150" height="6" rx="3" fill="#1e293b" />
+      <rect x="22" y="105" width="105" height="6" rx="3" fill="#38bdf8" />
+      <text x="22" y="123" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">70% Selesai</text>
+
+      <!-- Task Card 2 -->
+      <rect x="12" y="145" width="171" height="80" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+      <rect x="22" y="158" width="55" height="16" rx="3" fill="#10b981" fill-opacity="0.2" />
+      <text x="50" y="169" fill="#10b981" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" text-anchor="middle">API</text>
+      <text x="22" y="190" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Webhook Handling</text>
+    </g>
+
+    <!-- Col 3: Done -->
+    <g transform="translate(460, 60)">
+      <rect width="195" height="330" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <circle cx="20" cy="22" r="5" fill="#10b981" />
+      <text x="35" y="26" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">COMPLETED (5)</text>
+
+      <!-- Task Card Done 1 -->
+      <rect x="12" y="45" width="171" height="75" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1" stroke-opacity="0.5" />
+      <text x="22" y="70" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11">Setup Next.js 16 Core</text>
+      <text x="22" y="90" fill="#10b981" font-family="system-ui, sans-serif" font-size="9">&#x2713; Verified & Merged</text>
+
+      <!-- Task Card Done 2 -->
+      <rect x="12" y="130" width="171" height="75" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1" stroke-opacity="0.5" />
+      <text x="22" y="155" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11">Tailwind CSS 4 Tokens</text>
+      <text x="22" y="175" fill="#10b981" font-family="system-ui, sans-serif" font-size="9">&#x2713; Tested Responsive</text>
+    </g>
+  </g>
+</svg>

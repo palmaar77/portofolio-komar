@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sppBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="sppCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#sppBg)" />
+
+  <g transform="translate(60, 40)">
+    <rect width="680" height="420" rx="12" fill="url(#sppCard)" stroke="#334155" stroke-width="2" />
+    
+    <!-- Titlebar -->
+    <rect width="680" height="42" rx="12" fill="#1e293b" />
+    <rect y="30" width="680" height="12" fill="#1e293b" />
+    <line x1="0" y1="42" x2="680" y2="42" stroke="#334155" stroke-width="1" />
+    <circle cx="24" cy="21" r="6" fill="#ef4444" />
+    <circle cx="44" cy="21" r="6" fill="#f59e0b" />
+    <circle cx="64" cy="21" r="6" fill="#10b981" />
+    <text x="340" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">Sistem Manajemen Pembayaran SPP</text>
+
+    <!-- Stat widgets -->
+    <g transform="translate(25, 60)">
+      <rect width="195" height="75" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="18" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Total Pemasukan Bulan Ini</text>
+      <text x="18" y="55" fill="#10b981" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">Rp 48.500.000</text>
+
+      <rect x="215" width="195" height="75" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="233" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Siswa Lunas</text>
+      <text x="233" y="55" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">342 / 380 (90%)</text>
+
+      <rect x="430" width="195" height="75" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="448" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Status Tunggakan</text>
+      <text x="448" y="55" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">38 Siswa</text>
+    </g>
+
+    <!-- Data Table Mockup -->
+    <g transform="translate(25, 150)">
+      <rect width="625" height="240" rx="8" fill="#0b0f19" stroke="#334155" stroke-width="1" />
+      <!-- Table Header -->
+      <rect width="625" height="38" rx="8" fill="#1e293b" />
+      <rect y="25" width="625" height="13" fill="#1e293b" />
+      <line x1="0" y1="38" x2="625" y2="38" stroke="#334155" stroke-width="1" />
+      <text x="20" y="24" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">NIS / NAMA SISWA</text>
+      <text x="220" y="24" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">KELAS</text>
+      <text x="320" y="24" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">PERIODE</text>
+      <text x="430" y="24" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">NOMINAL</text>
+      <text x="535" y="24" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">STATUS</text>
+
+      <!-- Row 1 -->
+      <text x="20" y="65" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">20240101 - Ahmad Rizky</text>
+      <text x="220" y="65" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Kelas 5A</text>
+      <text x="320" y="65" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Oktober 2024</text>
+      <text x="430" y="65" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Rp 150.000</text>
+      <rect x="525" y="52" width="65" height="18" rx="4" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1" />
+      <text x="557" y="65" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">LUNAS</text>
+
+      <!-- Row 2 -->
+      <line x1="15" y1="80" x2="610" y2="80" stroke="#1e293b" stroke-width="1" />
+      <text x="20" y="105" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">20240102 - Siti Nurhaliza</text>
+      <text x="220" y="105" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Kelas 6B</text>
+      <text x="320" y="105" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Oktober 2024</text>
+      <text x="430" y="105" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Rp 150.000</text>
+      <rect x="525" y="92" width="65" height="18" rx="4" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1" />
+      <text x="557" y="105" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">LUNAS</text>
+
+      <!-- Row 3 -->
+      <line x1="15" y1="120" x2="610" y2="120" stroke="#1e293b" stroke-width="1" />
+      <text x="20" y="145" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">20240103 - Budi Santoso</text>
+      <text x="220" y="145" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Kelas 4C</text>
+      <text x="320" y="145" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Oktober 2024</text>
+      <text x="430" y="145" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Rp 150.000</text>
+      <rect x="525" y="132" width="65" height="18" rx="4" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1" />
+      <text x="557" y="145" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">PENDING</text>
+
+      <!-- Row 4 -->
+      <line x1="15" y1="160" x2="610" y2="160" stroke="#1e293b" stroke-width="1" />
+      <text x="20" y="185" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">20240104 - Diana Putri</text>
+      <text x="220" y="185" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Kelas 3A</text>
+      <text x="320" y="185" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Oktober 2024</text>
+      <text x="430" y="185" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="11">Rp 150.000</text>
+      <rect x="525" y="172" width="65" height="18" rx="4" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1" />
+      <text x="557" y="185" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">LUNAS</text>
+
+      <!-- Pagination footer -->
+      <line x1="0" y1="205" x2="625" y2="205" stroke="#334155" stroke-width="1" />
+      <text x="20" y="226" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">Menampilkan 1-4 dari 380 transaksi</text>
+      <rect x="535" y="213" width="75" height="20" rx="4" fill="#0284c7" />
+      <text x="572" y="227" fill="#ffffff" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">Cetak Laporan</text>
+    </g>
+  </g>
+</svg>
