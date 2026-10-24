@@ -2,127 +2,134 @@
 
 import * as React from "react";
 import { profileData, quickStats } from "@/data/profile";
-import {
-  Layers,
-  Cpu,
-  ShieldCheck,
-  Zap,
-  Sparkles,
-  CheckCircle,
-} from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 export function AboutSection() {
-  const highlights = [
+  const engineeringPrinciples = [
     {
-      icon: <Layers className="w-5 h-5 text-sky-500" />,
-      title: "Frontend Engineering",
-      description:
-        "Membangun antarmuka pengguna interaktif dengan React dan Next.js yang responsif, terstruktur, serta mengutamakan kecepatan akses dan SEO.",
+      title: "Antarmuka Responsif & Aksesibel",
+      desc: "Mengembangkan UI dengan struktur semantik HTML5, aksesibilitas keyboard (a11y), dan rendering cepat berbasis React Server Components.",
     },
     {
-      icon: <Cpu className="w-5 h-5 text-indigo-500" />,
-      title: "Backend & API Reliability",
-      description:
-        "Merancang arsitektur API RESTful yang modular, middleware validasi skema request, dan penanganan autentikasi yang aman.",
+      title: "Arsitektur API & Validasi Ketat",
+      desc: "Menyusun kontrak REST API yang konsisten, penanganan error terpusat, middleware otorisasi JWT, serta sanitasi input untuk mencegah celah keamanan.",
     },
     {
-      icon: <ShieldCheck className="w-5 h-5 text-emerald-500" />,
-      title: "Clean Code & Quality",
-      description:
-        "Menerapkan penulisan kode terstandar TypeScript, pemisahan tanggung jawab komponen, dan struktur folder yang mudah di-maintain.",
+      title: "Integritas Basis Data Relasional",
+      desc: "Merancang skema tabel terstruktur, relasi multi-tabel, index efisien, dan transaksi ACID menggunakan PostgreSQL dan Supabase.",
     },
     {
-      icon: <Zap className="w-5 h-5 text-amber-500" />,
-      title: "Problem Solver Mindset",
-      description:
-        "Berorientasi pada solusi praktis untuk menjawab kebutuhan pengguna dan efisiensi operasional organisasi secara terukur.",
+      title: "Pragmatisme Rekayasa Perangkat Lunak",
+      desc: "Mengutamakan solusi yang menyelesaikan kendala riil pengguna dengan kode yang modular, mudah dibaca, dan mudah dipelihara dalam jangka panjang.",
     },
   ];
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section
+      id="about"
+      aria-label="Tentang Developer"
+      className="py-20 sm:py-28 border-b border-[#DEDDD7] dark:border-[#30302D]"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400 bg-sky-500/10 border border-sky-500/20">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Tentang Saya</span>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-8 border-b border-[#DEDDD7] dark:border-[#30302D] gap-4">
+          <div>
+            <span className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] uppercase font-bold tracking-wider">
+              02 / PROFILE & APPROACH
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#171717] dark:text-[#F2F0EA] mt-1">
+              Pendekatan Rekayasa & Karakter Profesional
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Membangun Solusi Digital dengan Ketelitian & Dedikasi
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-            Perpaduan antara logika sistem backend yang kokoh dan keindahan antarmuka frontend yang intuitif.
+          <p className="text-xs font-mono text-[#70706C] dark:text-[#A5A39D] max-w-xs">
+            Prinsip pengembangan perangkat lunak berbasis ketelitian, efisiensi, dan kualitas kode.
           </p>
         </div>
 
-        {/* Content Grid */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Narrative */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md shadow-xs space-y-5">
-              <p className="text-base text-slate-800 dark:text-slate-200 font-medium leading-relaxed">
+        {/* Content Layout */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left: Narrative & Bio */}
+          <div className="lg:col-span-7 space-y-8">
+            <div className="space-y-4">
+              <p className="text-base sm:text-lg text-[#171717] dark:text-[#F2F0EA] font-medium leading-relaxed">
                 {profileData.aboutIntro}
               </p>
 
-              <div className="space-y-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                {profileData.aboutDetails.map((detail, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-sky-500 shrink-0 mt-1" />
-                    <span>{detail}</span>
+              <div className="space-y-3 pt-2 text-sm text-[#70706C] dark:text-[#A5A39D] leading-relaxed">
+                {profileData.aboutDetails.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* Principles Checklist */}
+            <div className="pt-6 border-t border-[#DEDDD7] dark:border-[#30302D] space-y-4">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-[#171717] dark:text-[#F2F0EA] font-bold">
+                Prinsip Engineering:
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {engineeringPrinciples.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] space-y-1.5"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="w-4 h-4 rounded-full bg-[#285B4A]/10 dark:bg-[#4E9A7E]/10 text-[#285B4A] dark:text-[#4E9A7E] flex items-center justify-center shrink-0">
+                        <Check className="w-2.5 h-2.5" />
+                      </span>
+                      <h4 className="text-xs font-bold text-[#171717] dark:text-[#F2F0EA]">
+                        {item.title}
+                      </h4>
+                    </div>
+                    <p className="text-xs text-[#70706C] dark:text-[#A5A39D] leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 ))}
               </div>
-
-              {/* Quick Contact summary */}
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-                <span>Domain: Web Application Development</span>
-                <span>•</span>
-                <span>Stack: Next.js + TypeScript + Node.js</span>
-              </div>
-            </div>
-
-            {/* Quick Stats Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {quickStats.map((item, index) => (
-                <div
-                  key={index}
-                  className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/40 backdrop-blur-sm text-center"
-                >
-                  <div className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase tracking-wider">
-                    {item.label}
-                  </div>
-                  <div className="mt-1 text-sm font-bold text-slate-900 dark:text-slate-100">
-                    {item.value}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
 
-          {/* Right Highlights Cards */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-            {highlights.map((item, index) => (
-              <div
-                key={index}
-                className="group p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 hover:border-sky-500/50 hover:bg-white dark:hover:bg-slate-900 transition-all duration-300 shadow-xs hover:shadow-md"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform duration-300">
-                    {item.icon}
+          {/* Right: Technical Matrix & Quick Stats */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Quick Stats Grid */}
+            <div className="p-6 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] space-y-4">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-[#171717] dark:text-[#F2F0EA] font-bold pb-3 border-b border-[#DEDDD7] dark:border-[#30302D]">
+                Informasi Ringkas Kapabilitas
+              </h3>
+
+              <dl className="space-y-3.5 text-xs">
+                {quickStats.map((stat, idx) => (
+                  <div key={idx} className="flex items-center justify-between gap-4">
+                    <dt className="font-mono text-[#70706C] dark:text-[#A5A39D]">
+                      {stat.label}
+                    </dt>
+                    <dd className="font-bold text-[#171717] dark:text-[#F2F0EA] text-right">
+                      {stat.value}
+                    </dd>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="mt-2.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {item.description}
-                </p>
+                ))}
+              </dl>
+            </div>
+
+            {/* Engineering Environment Card */}
+            <div className="p-6 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#EFEFEA] dark:bg-[#1C1C1B] space-y-3 text-xs">
+              <span className="font-mono text-[10px] uppercase text-[#285B4A] dark:text-[#4E9A7E] font-bold tracking-wider">
+                LINGKUNGAN & ALUR KERJA
+              </span>
+              <p className="text-[#171717] dark:text-[#F2F0EA] font-medium leading-relaxed">
+                Menggunakan alur kerja modern berbasis Git version control, tinjauan komit terstruktur, automated linting ESLint, static typing TypeScript ketat, dan pipeline deployment Vercel.
+              </p>
+              <div className="pt-2">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-[#285B4A] dark:text-[#4E9A7E] hover:underline"
+                >
+                  <span>Mulai Diskusi Proyek</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>

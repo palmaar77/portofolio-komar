@@ -7,11 +7,10 @@ import { ProjectItem } from "@/types/portfolio";
 import {
   ExternalLink,
   Search,
-  Sparkles,
-  CheckCircle2,
   X,
   Info,
-  ChevronRight,
+  ArrowUpRight,
+  Check,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 
@@ -20,7 +19,7 @@ export function ProjectsSection() {
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [activeModalProject, setActiveModalProject] = React.useState<ProjectItem | null>(null);
 
-  // Lock body scroll when project modal is open
+  // Lock body scroll when modal is open
   React.useEffect(() => {
     if (activeModalProject) {
       document.body.style.overflow = "hidden";
@@ -32,7 +31,15 @@ export function ProjectsSection() {
     };
   }, [activeModalProject]);
 
-  // Filter projects based on category and search query
+  // Handle ESC key for modal
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveModalProject(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const filteredProjects = React.useMemo(() => {
     return projectsData.filter((project) => {
       const matchesCategory =
@@ -50,46 +57,41 @@ export function ProjectsSection() {
     });
   }, [selectedCategory, searchQuery]);
 
-  const getStatusBadge = (status: ProjectItem["statusBadge"]) => {
-    switch (status) {
-      case "Live Production":
-        return "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400";
-      case "Demo Project":
-        return "border-sky-500/30 bg-sky-500/10 text-sky-700 dark:text-sky-400";
-      case "In Development":
-        return "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400";
-      case "Case Study":
-        return "border-indigo-500/30 bg-indigo-500/10 text-indigo-700 dark:text-indigo-400";
-      default:
-        return "border-slate-500/30 bg-slate-500/10 text-slate-700 dark:text-slate-400";
-    }
-  };
+  // Separate the premier flagship project when viewing "all" with no search
+  const isDefaultView = selectedCategory === "all" && !searchQuery.trim();
+  const flagshipProject = isDefaultView
+    ? filteredProjects.find((p) => p.id === "website-sekolah-sd") || filteredProjects[0]
+    : null;
+  const remainingProjects = isDefaultView
+    ? filteredProjects.filter((p) => p.id !== flagshipProject?.id)
+    : filteredProjects;
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute top-1/3 right-0 w-80 h-80 bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section
+      id="projects"
+      aria-label="Portofolio Proyek"
+      className="py-20 sm:py-28 border-b border-[#DEDDD7] dark:border-[#30302D]"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400 bg-sky-500/10 border border-sky-500/20">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Portofolio Proyek</span>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-8 border-b border-[#DEDDD7] dark:border-[#30302D] gap-4">
+          <div>
+            <span className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] uppercase font-bold tracking-wider">
+              04 / VERIFIED WORK
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#171717] dark:text-[#F2F0EA] mt-1">
+              Portofolio Proyek & Studi Kasus
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Karya & Implementasi Nyata
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-            Koleksi proyek pilihan yang menunjukkan kemampuan saya dalam merancang frontend yang responsif,
-            mengembangkan backend andal, dan memecahkan permasalahan nyata.
+          <p className="text-xs font-mono text-[#70706C] dark:text-[#A5A39D] max-w-xs">
+            Implementasi nyata yang membuktikan kapabilitas arsitektur software dari frontend hingga backend.
           </p>
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="mt-8 sm:mt-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-          {/* Category Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 -mx-4 px-4 md:mx-0 w-auto md:w-auto flex-nowrap md:flex-wrap">
+        <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+          {/* Category Filter */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
             {projectCategories.map((cat) => {
               const isSelected = selectedCategory === cat.id;
               return (
@@ -97,10 +99,10 @@ export function ProjectsSection() {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold shrink-0 transition-all duration-200 active:scale-95 ${
+                  className={`px-3 py-1.5 rounded text-xs font-mono transition-colors shrink-0 cursor-pointer ${
                     isSelected
-                      ? "bg-sky-500 text-white shadow-md shadow-sky-500/25"
-                      : "border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-slate-200"
+                      ? "bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] font-semibold"
+                      : "border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA]"
                   }`}
                 >
                   {cat.label}
@@ -110,21 +112,21 @@ export function ProjectsSection() {
           </div>
 
           {/* Search Box */}
-          <div className="relative w-full md:w-72">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#70706C] dark:text-[#A5A39D]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari proyek atau teknologi..."
-              className="w-full pl-9 pr-4 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              placeholder="Cari proyek / stack..."
+              className="w-full pl-8 pr-7 py-1.5 rounded text-xs font-mono border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#171717] dark:text-[#F2F0EA] placeholder-[#70706C] dark:placeholder-[#A5A39D] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#285B4A]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-                aria-label="Hapus pencarian"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#70706C] hover:text-[#171717] dark:hover:text-[#F2F0EA]"
+                aria-label="Bersihkan pencarian"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -132,15 +134,120 @@ export function ProjectsSection() {
           </div>
         </div>
 
+        {/* Flagship Featured Showcase (When default all view is active) */}
+        {flagshipProject && (
+          <div className="mt-8 p-6 sm:p-8 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#DEDDD7] dark:border-[#30302D] text-xs font-mono">
+              <span className="text-[#285B4A] dark:text-[#4E9A7E] font-bold tracking-wider">
+                ● PROYEK UNGGULAN PRODUKSI (FLAGSHIP)
+              </span>
+              <span className="text-[#70706C] dark:text-[#A5A39D]">
+                STATUS: {flagshipProject.statusBadge.toUpperCase()}
+              </span>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Details */}
+              <div className="lg:col-span-7 space-y-4">
+                <div>
+                  <span className="font-mono text-[11px] text-[#70706C] dark:text-[#A5A39D] uppercase">
+                    {flagshipProject.categoryLabel}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#171717] dark:text-[#F2F0EA] mt-1">
+                    {flagshipProject.title}
+                  </h3>
+                </div>
+
+                <p className="text-sm text-[#70706C] dark:text-[#A5A39D] leading-relaxed">
+                  {flagshipProject.summary}
+                </p>
+
+                <div className="p-3.5 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] text-xs">
+                  <span className="font-mono font-bold text-[#171717] dark:text-[#F2F0EA] block mb-1">
+                    TARGET & SOLUSI:
+                  </span>
+                  <p className="text-[#70706C] dark:text-[#A5A39D] leading-relaxed">
+                    {flagshipProject.problemSolved}
+                  </p>
+                </div>
+
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {flagshipProject.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 rounded text-[10px] font-mono border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#171717] dark:text-[#F2F0EA]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Actions */}
+                <div className="pt-3 flex flex-wrap items-center gap-3">
+                  {flagshipProject.liveUrl && (
+                    <a
+                      href={flagshipProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] hover:bg-[#285B4A] dark:hover:bg-[#4E9A7E] transition-colors"
+                    >
+                      <span>Buka Live Demo</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+
+                  {flagshipProject.githubUrl && (
+                    <a
+                      href={flagshipProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-mono font-medium border border-[#DEDDD7] dark:border-[#30302D] bg-transparent text-[#171717] dark:text-[#F2F0EA] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors"
+                    >
+                      <GithubIcon className="w-3.5 h-3.5" />
+                      <span>Repository</span>
+                    </a>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveModalProject(flagshipProject)}
+                    className="inline-flex items-center gap-1 px-3.5 py-2 rounded text-xs font-mono font-medium text-[#285B4A] dark:text-[#4E9A7E] hover:underline cursor-pointer"
+                  >
+                    <span>Detail Fitur & Studi Kasus →</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Visual Image */}
+              <div className="lg:col-span-5">
+                <div className="relative aspect-[16/10] rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#141414] overflow-hidden group">
+                  <Image
+                    src={flagshipProject.image}
+                    alt={`Preview ${flagshipProject.title}`}
+                    width={600}
+                    height={380}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                    unoptimized
+                  />
+                  <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/75 text-[10px] font-mono text-white">
+                    LIVE PRODUCTION PREVIEW
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Projects Grid */}
         {filteredProjects.length === 0 ? (
-          <div className="mt-16 text-center py-16 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 bg-white/40 dark:bg-slate-900/30">
-            <Info className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">
+          <div className="mt-12 text-center py-16 border border-dashed border-[#DEDDD7] dark:border-[#30302D] rounded-lg">
+            <Info className="w-8 h-8 text-[#70706C] dark:text-[#A5A39D] mx-auto mb-2" />
+            <h3 className="text-sm font-bold text-[#171717] dark:text-[#F2F0EA]">
               Tidak ada proyek yang sesuai
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
-              Coba gunakan kata kunci pencarian lain atau pilih kategori &quot;Semua Proyek&quot;.
+            <p className="text-xs text-[#70706C] dark:text-[#A5A39D] mt-1 font-mono">
+              Silakan atur ulang kata kunci pencarian atau pilih kategori lain.
             </p>
             <button
               type="button"
@@ -148,89 +255,72 @@ export function ProjectsSection() {
                 setSelectedCategory("all");
                 setSearchQuery("");
               }}
-              className="mt-4 px-4 py-2 text-xs font-semibold rounded-xl bg-sky-500 text-white"
+              className="mt-4 px-3 py-1.5 text-xs font-mono bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] rounded cursor-pointer"
             >
               Reset Filter
             </button>
           </div>
         ) : (
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project) => (
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {remainingProjects.map((project) => (
               <article
                 key={project.id}
-                className="group rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md overflow-hidden hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+                className="p-6 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] flex flex-col justify-between hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors"
               >
-                {/* Project Image / Mockup preview */}
-                <div>
-                  <div className="relative w-full aspect-[16/10] bg-slate-950 overflow-hidden border-b border-slate-200/80 dark:border-slate-800">
-                    <Image
-                      src={project.image}
-                      alt={`Screenshot ${project.title}`}
-                      width={640}
-                      height={400}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      unoptimized
-                    />
-
-                    {/* Category & Status Overlay Badges */}
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white border border-white/10 font-semibold shadow-xs">
-                        {project.categoryLabel}
-                      </span>
-                      <span
-                        className={`text-[10px] font-mono px-2.5 py-1 rounded-full border backdrop-blur-md font-bold shadow-xs ${getStatusBadge(
-                          project.statusBadge
-                        )}`}
-                      >
-                        {project.statusBadge}
-                      </span>
-                    </div>
+                <div className="space-y-4">
+                  {/* Top Meta */}
+                  <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#DEDDD7]/60 dark:border-[#30302D]/60 text-xs font-mono">
+                    <span className="text-[#70706C] dark:text-[#A5A39D] uppercase">
+                      {project.categoryLabel}
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] font-medium">
+                      {project.statusBadge}
+                    </span>
                   </div>
 
-                  {/* Card Content */}
-                  <div className="p-6 space-y-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
-                        {project.summary}
-                      </p>
-                    </div>
+                  {/* Title & Summary */}
+                  <div>
+                    <h3 className="text-base font-bold text-[#171717] dark:text-[#F2F0EA]">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 text-xs text-[#70706C] dark:text-[#A5A39D] leading-relaxed line-clamp-3">
+                      {project.summary}
+                    </p>
+                  </div>
 
-                    {/* Problem Solved teaser */}
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800/80 text-xs">
-                      <span className="font-semibold text-slate-800 dark:text-slate-200 block text-[11px] mb-1">
-                        🎯 Solusi:
+                  {/* Image Preview thumbnail */}
+                  <div className="relative aspect-[16/9] rounded border border-[#DEDDD7]/80 dark:border-[#30302D]/80 bg-[#141414] overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={`Preview ${project.title}`}
+                      width={500}
+                      height={280}
+                      className="w-full h-full object-cover"
+                      unoptimized
+                    />
+                  </div>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#EFEFEA] dark:bg-[#252524] text-[#171717] dark:text-[#F2F0EA]"
+                      >
+                        {tech}
                       </span>
-                      <p className="text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                        {project.problemSolved}
-                      </p>
-                    </div>
-
-                    {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 rounded-md text-[10px] font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Card Action Buttons */}
-                <div className="p-6 pt-0 border-t border-slate-100 dark:border-slate-800/80 mt-4 flex items-center justify-between gap-2">
+                {/* Footer Actions */}
+                <div className="pt-4 mt-4 border-t border-[#DEDDD7]/60 dark:border-[#30302D]/60 flex items-center justify-between gap-2">
                   <button
                     type="button"
                     onClick={() => setActiveModalProject(project)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-mono text-[#285B4A] dark:text-[#4E9A7E] hover:underline cursor-pointer"
                   >
-                    <span>Detail Fitur</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
+                    <span>Detail Spesifikasi →</span>
                   </button>
 
                   <div className="flex items-center gap-2">
@@ -239,11 +329,11 @@ export function ProjectsSection() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300 transition-colors"
-                        title="Lihat Source Code GitHub"
-                        aria-label="Source code GitHub"
+                        className="p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#70706C] dark:text-[#A5A39D] transition-colors"
+                        title="Repository GitHub"
+                        aria-label="Repository GitHub"
                       >
-                        <GithubIcon className="w-4 h-4" />
+                        <GithubIcon className="w-3.5 h-3.5" />
                       </a>
                     )}
                     {project.liveUrl && (
@@ -251,11 +341,11 @@ export function ProjectsSection() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-500 hover:bg-sky-600 text-white shadow-sm shadow-sky-500/25 transition-all"
-                        title="Buka Demo Aplikasi"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] hover:bg-[#285B4A] dark:hover:bg-[#4E9A7E] transition-colors"
+                        title="Kunjungi Demo"
                       >
-                        <span>Live Demo</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Demo</span>
+                        <ArrowUpRight className="w-3 h-3" />
                       </a>
                     )}
                   </div>
@@ -265,61 +355,74 @@ export function ProjectsSection() {
           </div>
         )}
 
-        {/* Modal for In-depth Project Details */}
+        {/* Project Detail / Case Study Modal Dialog */}
         {activeModalProject && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
-            <div className="relative w-full sm:max-w-2xl max-h-[92vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-2xl pb-safe">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+          >
+            <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] p-6 sm:p-8 shadow-2xl">
               {/* Close Button */}
               <button
                 type="button"
                 onClick={() => setActiveModalProject(null)}
-                className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                aria-label="Tutup jendela detail proyek"
+                className="absolute top-5 right-5 p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors cursor-pointer"
+                aria-label="Tutup jendela studi kasus"
               >
                 <X className="w-4 h-4" />
               </button>
 
               <div className="space-y-6">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">
+                {/* Header */}
+                <div className="space-y-1 pb-4 border-b border-[#DEDDD7] dark:border-[#30302D]">
+                  <div className="flex items-center gap-2 font-mono text-xs">
+                    <span className="text-[#285B4A] dark:text-[#4E9A7E] font-bold">
                       {activeModalProject.categoryLabel}
                     </span>
-                    <span
-                      className={`text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full border ${getStatusBadge(
-                        activeModalProject.statusBadge
-                      )}`}
-                    >
+                    <span>•</span>
+                    <span className="text-[#70706C] dark:text-[#A5A39D]">
                       {activeModalProject.statusBadge}
                     </span>
                   </div>
-                  <h3 className="mt-3 text-2xl font-extrabold text-slate-900 dark:text-white">
+                  <h3
+                    id="modal-title"
+                    className="text-xl sm:text-2xl font-extrabold text-[#171717] dark:text-[#F2F0EA] pt-1"
+                  >
                     {activeModalProject.title}
                   </h3>
-                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                </div>
+
+                {/* Summary */}
+                <div>
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-[#70706C] dark:text-[#A5A39D] mb-1">
+                    Ringkasan Proyek
+                  </h4>
+                  <p className="text-sm text-[#171717] dark:text-[#F2F0EA] leading-relaxed">
                     {activeModalProject.summary}
                   </p>
                 </div>
 
                 {/* Problem Solved */}
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
-                  <h4 className="text-xs font-mono uppercase tracking-wider font-bold text-slate-900 dark:text-slate-200 mb-1.5">
-                    Permasalahan & Solusi:
+                <div className="p-4 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-[#171717] dark:text-[#F2F0EA] font-bold mb-1">
+                    Tantangan & Solusi Rekayasa:
                   </h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-[#70706C] dark:text-[#A5A39D] leading-relaxed">
                     {activeModalProject.problemSolved}
                   </p>
                 </div>
 
-                {/* Key Features List */}
+                {/* Features list */}
                 <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider font-bold text-slate-900 dark:text-slate-200 mb-3">
-                    Fitur & Arsitektur Utama:
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-[#70706C] dark:text-[#A5A39D] mb-2">
+                    Fitur & Modul Utama
                   </h4>
-                  <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+                  <ul className="space-y-1.5 text-xs text-[#171717] dark:text-[#F2F0EA]">
                     {activeModalProject.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2">
+                        <Check className="w-3.5 h-3.5 text-[#285B4A] dark:text-[#4E9A7E] shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -328,14 +431,14 @@ export function ProjectsSection() {
 
                 {/* Tech Stack */}
                 <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider font-bold text-slate-900 dark:text-slate-200 mb-2">
-                    Teknologi Digunakan:
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-[#70706C] dark:text-[#A5A39D] mb-2">
+                    Teknologi yang Digunakan
                   </h4>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {activeModalProject.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                        className="px-2 py-0.5 rounded text-xs font-mono border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#171717] dark:text-[#F2F0EA]"
                       >
                         {tech}
                       </span>
@@ -343,17 +446,17 @@ export function ProjectsSection() {
                   </div>
                 </div>
 
-                {/* Modal Footer CTAs */}
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-end gap-3">
+                {/* Actions */}
+                <div className="pt-4 border-t border-[#DEDDD7] dark:border-[#30302D] flex flex-wrap items-center justify-end gap-3">
                   {activeModalProject.githubUrl && (
                     <a
                       href={activeModalProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-mono font-medium border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#171717] dark:text-[#F2F0EA] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors"
                     >
-                      <GithubIcon className="w-4 h-4" />
-                      <span>Source Code</span>
+                      <GithubIcon className="w-3.5 h-3.5" />
+                      <span>Lihat Kode di GitHub</span>
                     </a>
                   )}
 
@@ -362,10 +465,10 @@ export function ProjectsSection() {
                       href={activeModalProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white shadow-md shadow-sky-500/25 transition-all"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] hover:bg-[#285B4A] dark:hover:bg-[#4E9A7E] transition-colors"
                     >
-                      <span>Kunjungi Live Demo</span>
-                      <ExternalLink className="w-4 h-4" />
+                      <span>Kunjungi Demo Langsung</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
                 </div>

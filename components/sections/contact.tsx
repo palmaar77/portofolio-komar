@@ -7,8 +7,6 @@ import {
   Send,
   Copy,
   Check,
-  Globe,
-  Sparkles,
   AlertCircle,
   CheckCircle2,
   Loader2,
@@ -45,20 +43,20 @@ export function ContactSection() {
     const errors: Record<string, string> = {};
 
     if (!formData.name.trim() || formData.name.trim().length < 2) {
-      errors.name = "Nama wajib diisi minimal 2 karakter.";
+      errors.name = "Nama lengkap wajib diisi minimal 2 karakter.";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
-      errors.email = "Alamat email tidak valid.";
+      errors.email = "Format alamat email tidak valid.";
     }
 
     if (!formData.subject.trim() || formData.subject.trim().length < 3) {
-      errors.subject = "Subjek wajib diisi minimal 3 karakter.";
+      errors.subject = "Subjek diskusi wajib diisi minimal 3 karakter.";
     }
 
     if (!formData.message.trim() || formData.message.trim().length < 10) {
-      errors.message = "Pesan wajib diisi minimal 10 karakter.";
+      errors.message = "Pesan diskusi wajib diisi minimal 10 karakter.";
     }
 
     setFormErrors(errors);
@@ -92,12 +90,12 @@ export function ContactSection() {
         mailtoLink: data.mailtoLink,
       });
 
-      // Launch celebratory confetti
+      // Subtle celebration confetti
       confetti({
-        particleCount: 80,
-        spread: 60,
+        particleCount: 50,
+        spread: 45,
         origin: { y: 0.7 },
-        colors: ["#38bdf8", "#818cf8", "#10b981"],
+        colors: ["#285B4A", "#4E9A7E", "#171717"],
       });
 
       // Reset form
@@ -113,7 +111,7 @@ export function ContactSection() {
       const errorMessage =
         err instanceof Error
           ? err.message
-          : "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.";
+          : "Terjadi kesalahan saat memproses formulir. Silakan coba lagi.";
       setSubmitResult({
         type: "error",
         message: errorMessage,
@@ -124,122 +122,109 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section
+      id="contact"
+      aria-label="Kontak dan Diskusi"
+      className="py-20 sm:py-28 border-b border-[#DEDDD7] dark:border-[#30302D]"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400 bg-sky-500/10 border border-sky-500/20">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Kontak & Kolaborasi</span>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-8 border-b border-[#DEDDD7] dark:border-[#30302D] gap-4">
+          <div>
+            <span className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] uppercase font-bold tracking-wider">
+              07 / INTAKE & CONTACT
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#171717] dark:text-[#F2F0EA] mt-1">
+              Konsultasi & Diskusi Proyek
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Punya Ide Menarik? Mari Kita Bangun Bersama.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-            Apakah Anda memiliki proyek baru, tawaran kerja, pertanyaan teknis, atau sekadar ingin
-            berdiskusi seputar web development? Silakan kirimkan pesan Anda melalui formulir di bawah ini.
+          <p className="text-xs font-mono text-[#70706C] dark:text-[#A5A39D] max-w-xs">
+            Saluran langsung untuk mendiskusikan implementasi proyek baru, kolaborasi, atau peluang kerja.
           </p>
         </div>
 
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Direct Contact Info & Socials */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: Direct Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-5 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm space-y-6">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                Informasi Kontak Langsung
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Saya selalu terbuka untuk mendiskusikan peluang proyek baru, kolaborasi rekayasa
-                perangkat lunak, atau pertukaran wawasan teknologi.
-              </p>
-
-              {/* Copy Email Widget */}
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 space-y-2">
-                <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
-                  Email Resmi
+            <div className="p-6 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] space-y-5">
+              <div>
+                <span className="font-mono text-[10px] uppercase text-[#70706C] dark:text-[#A5A39D] tracking-wider">
+                  KOMUNIKASI LANGSUNG
                 </span>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm font-semibold text-slate-900 dark:text-white break-all">
+                <h3 className="text-base font-bold text-[#171717] dark:text-[#F2F0EA] mt-0.5">
+                  Surel Resmi & Ketersediaan
+                </h3>
+              </div>
+
+              {/* Copy Email Box */}
+              <div className="p-3.5 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] space-y-1.5">
+                <span className="font-mono text-[10px] text-[#70706C] dark:text-[#A5A39D] uppercase">
+                  Alamat Email:
+                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-mono font-bold text-[#171717] dark:text-[#F2F0EA] break-all">
                     {profileData.email}
                   </span>
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors shadow-xs shrink-0"
-                    title="Salin alamat email"
+                    className="p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#171717] dark:text-[#F2F0EA] transition-colors shrink-0 cursor-pointer"
+                    title="Salin email"
                     aria-label="Salin email ke clipboard"
                   >
                     {copiedEmail ? (
-                      <Check className="w-4 h-4 text-emerald-500" />
+                      <Check className="w-3.5 h-3.5 text-[#285B4A] dark:text-[#4E9A7E]" />
                     ) : (
-                      <Copy className="w-4 h-4" />
+                      <Copy className="w-3.5 h-3.5" />
                     )}
                   </button>
                 </div>
                 {copiedEmail && (
-                  <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-                    ✓ Alamat email disalin ke clipboard!
+                  <p className="text-[10px] font-mono text-[#285B4A] dark:text-[#4E9A7E]">
+                    ✓ Disalin ke clipboard
                   </p>
                 )}
               </div>
 
-              {/* Status & Availability Card */}
-              <div className="p-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 space-y-1">
-                <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>{profileData.status.label}</span>
-                </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">
-                  Tersedia untuk proyek full-stack, konsultasi frontend/backend, dan freelance.
-                </p>
+              {/* Availability Notice */}
+              <div className="flex items-center gap-2 text-xs font-mono">
+                <span className="w-2 h-2 rounded-full bg-[#285B4A] dark:bg-[#4E9A7E]" />
+                <span className="text-[#285B4A] dark:text-[#4E9A7E] font-medium">
+                  {profileData.status.label}
+                </span>
+                <span className="text-[#70706C] dark:text-[#A5A39D]">({profileData.location})</span>
               </div>
 
-              {/* Social Channels */}
-              <div className="space-y-3 pt-2">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
-                  Kanal Profesional Lainnya
-                </h4>
-                <div className="grid grid-cols-1 gap-2.5">
+              {/* Social Channels List */}
+              <div className="pt-4 border-t border-[#DEDDD7] dark:border-[#30302D] space-y-2">
+                <span className="font-mono text-[10px] uppercase text-[#70706C] dark:text-[#A5A39D] block mb-1">
+                  Kanal Digital Lainnya:
+                </span>
+                <div className="flex flex-col gap-2 text-xs font-mono">
                   <a
                     href={profileData.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sky-500 hover:bg-white dark:hover:bg-slate-800/80 transition-all text-xs text-slate-700 dark:text-slate-300"
+                    className="flex items-center justify-between p-2.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <GithubIcon className="w-4 h-4 text-slate-900 dark:text-white" />
-                      <span className="font-semibold">GitHub Profile</span>
+                    <div className="flex items-center gap-2">
+                      <GithubIcon className="w-3.5 h-3.5" />
+                      <span>github/{profileData.username}</span>
                     </div>
-                    <span className="text-slate-400">@{profileData.username}</span>
+                    <ExternalLink className="w-3 h-3 text-[#70706C]" />
                   </a>
 
                   <a
                     href={profileData.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-pink-500 hover:bg-white dark:hover:bg-slate-800/80 transition-all text-xs text-slate-700 dark:text-slate-300"
+                    className="flex items-center justify-between p-2.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <InstagramIcon className="w-4 h-4 text-pink-500" />
-                      <span className="font-semibold">Instagram</span>
+                    <div className="flex items-center gap-2">
+                      <InstagramIcon className="w-3.5 h-3.5" />
+                      <span>instagram/@komaaarrr._</span>
                     </div>
-                    <span className="text-slate-400">@komaaarrr._</span>
-                  </a>
-
-                  <a
-                    href={profileData.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sky-500 hover:bg-white dark:hover:bg-slate-800/80 transition-all text-xs text-slate-700 dark:text-slate-300"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <Globe className="w-4 h-4 text-sky-500" />
-                      <span className="font-semibold">Website Proyek SD</span>
-                    </div>
-                    <span className="text-slate-400">Live Demo</span>
+                    <ExternalLink className="w-3 h-3 text-[#70706C]" />
                   </a>
                 </div>
               </div>
@@ -248,9 +233,9 @@ export function ContactSection() {
 
           {/* Right Column: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="p-5 sm:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm">
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                {/* Honeypot field for anti-spam */}
+            <div className="p-6 sm:p-8 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                {/* Honeypot field for spam bots */}
                 <input
                   type="text"
                   name="_honeypot"
@@ -261,12 +246,12 @@ export function ContactSection() {
                   autoComplete="off"
                 />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                  {/* Name field */}
-                  <div className="space-y-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Name */}
+                  <div className="space-y-1">
                     <label
                       htmlFor="contact-name"
-                      className="block text-xs font-semibold text-slate-700 dark:text-slate-300"
+                      className="block text-xs font-mono font-medium text-[#171717] dark:text-[#F2F0EA]"
                     >
                       Nama Lengkap <span className="text-red-500">*</span>
                     </label>
@@ -278,26 +263,26 @@ export function ContactSection() {
                         setFormData({ ...formData, name: e.target.value });
                         if (formErrors.name) setFormErrors({ ...formErrors, name: "" });
                       }}
-                      placeholder="Masukkan nama Anda"
-                      className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
+                      placeholder="Nama Anda"
+                      className={`w-full px-3 py-2 rounded text-xs border ${
                         formErrors.name
-                          ? "border-red-500 focus:ring-red-500"
-                          : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
-                      } bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                          ? "border-red-500 focus-visible:ring-red-500"
+                          : "border-[#DEDDD7] dark:border-[#30302D] focus-visible:ring-[#285B4A]"
+                      } bg-[#F7F6F2] dark:bg-[#141414] text-[#171717] dark:text-[#F2F0EA] placeholder-[#70706C] dark:placeholder-[#A5A39D] focus-visible:outline-none focus-visible:ring-1 transition-colors`}
                     />
                     {formErrors.name && (
-                      <p className="text-[11px] text-red-500 flex items-center gap-1">
+                      <p className="text-[10px] font-mono text-red-500 flex items-center gap-1 mt-0.5">
                         <AlertCircle className="w-3 h-3" />
                         <span>{formErrors.name}</span>
                       </p>
                     )}
                   </div>
 
-                  {/* Email field */}
-                  <div className="space-y-1.5">
+                  {/* Email */}
+                  <div className="space-y-1">
                     <label
                       htmlFor="contact-email"
-                      className="block text-xs font-semibold text-slate-700 dark:text-slate-300"
+                      className="block text-xs font-mono font-medium text-[#171717] dark:text-[#F2F0EA]"
                     >
                       Alamat Email <span className="text-red-500">*</span>
                     </label>
@@ -309,15 +294,15 @@ export function ContactSection() {
                         setFormData({ ...formData, email: e.target.value });
                         if (formErrors.email) setFormErrors({ ...formErrors, email: "" });
                       }}
-                      placeholder="email@contoh.com"
-                      className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
+                      placeholder="email@domain.com"
+                      className={`w-full px-3 py-2 rounded text-xs border ${
                         formErrors.email
-                          ? "border-red-500 focus:ring-red-500"
-                          : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
-                      } bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                          ? "border-red-500 focus-visible:ring-red-500"
+                          : "border-[#DEDDD7] dark:border-[#30302D] focus-visible:ring-[#285B4A]"
+                      } bg-[#F7F6F2] dark:bg-[#141414] text-[#171717] dark:text-[#F2F0EA] placeholder-[#70706C] dark:placeholder-[#A5A39D] focus-visible:outline-none focus-visible:ring-1 transition-colors`}
                     />
                     {formErrors.email && (
-                      <p className="text-[11px] text-red-500 flex items-center gap-1">
+                      <p className="text-[10px] font-mono text-red-500 flex items-center gap-1 mt-0.5">
                         <AlertCircle className="w-3 h-3" />
                         <span>{formErrors.email}</span>
                       </p>
@@ -325,11 +310,11 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                {/* Subject field */}
-                <div className="space-y-1.5">
+                {/* Subject */}
+                <div className="space-y-1">
                   <label
                     htmlFor="contact-subject"
-                    className="block text-xs font-semibold text-slate-700 dark:text-slate-300"
+                    className="block text-xs font-mono font-medium text-[#171717] dark:text-[#F2F0EA]"
                   >
                     Subjek Diskusi <span className="text-red-500">*</span>
                   </label>
@@ -341,76 +326,76 @@ export function ContactSection() {
                       setFormData({ ...formData, subject: e.target.value });
                       if (formErrors.subject) setFormErrors({ ...formErrors, subject: "" });
                     }}
-                    placeholder="Contoh: Tawaran Proyek Website Sekolah / Kerja Sama"
-                    className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
+                    placeholder="Contoh: Kebutuhan Website / Penawaran Kolaborasi"
+                    className={`w-full px-3 py-2 rounded text-xs border ${
                       formErrors.subject
-                        ? "border-red-500 focus:ring-red-500"
-                        : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
-                    } bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                        ? "border-red-500 focus-visible:ring-red-500"
+                        : "border-[#DEDDD7] dark:border-[#30302D] focus-visible:ring-[#285B4A]"
+                    } bg-[#F7F6F2] dark:bg-[#141414] text-[#171717] dark:text-[#F2F0EA] placeholder-[#70706C] dark:placeholder-[#A5A39D] focus-visible:outline-none focus-visible:ring-1 transition-colors`}
                   />
                   {formErrors.subject && (
-                    <p className="text-[11px] text-red-500 flex items-center gap-1">
+                    <p className="text-[10px] font-mono text-red-500 flex items-center gap-1 mt-0.5">
                       <AlertCircle className="w-3 h-3" />
                       <span>{formErrors.subject}</span>
                     </p>
                   )}
                 </div>
 
-                {/* Message field */}
-                <div className="space-y-1.5">
+                {/* Message */}
+                <div className="space-y-1">
                   <label
                     htmlFor="contact-message"
-                    className="block text-xs font-semibold text-slate-700 dark:text-slate-300"
+                    className="block text-xs font-mono font-medium text-[#171717] dark:text-[#F2F0EA]"
                   >
-                    Isi Pesan <span className="text-red-500">*</span>
+                    Pesan Detail <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     id="contact-message"
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) => {
                       setFormData({ ...formData, message: e.target.value });
                       if (formErrors.message) setFormErrors({ ...formErrors, message: "" });
                     }}
-                    placeholder="Ceritakan detail proyek, spesifikasi fitur, atau pertanyaan Anda..."
-                    className={`w-full px-4 py-3 sm:py-2.5 rounded-xl text-base sm:text-xs border ${
+                    placeholder="Jelaskan kebutuhan proyek, jadwal pengerjaan, atau pertanyaan Anda..."
+                    className={`w-full px-3 py-2 rounded text-xs border ${
                       formErrors.message
-                        ? "border-red-500 focus:ring-red-500"
-                        : "border-slate-200 dark:border-slate-800 focus:ring-sky-500"
-                    } bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-y`}
+                        ? "border-red-500 focus-visible:ring-red-500"
+                        : "border-[#DEDDD7] dark:border-[#30302D] focus-visible:ring-[#285B4A]"
+                    } bg-[#F7F6F2] dark:bg-[#141414] text-[#171717] dark:text-[#F2F0EA] placeholder-[#70706C] dark:placeholder-[#A5A39D] focus-visible:outline-none focus-visible:ring-1 transition-colors resize-y`}
                   />
                   {formErrors.message && (
-                    <p className="text-[11px] text-red-500 flex items-center gap-1">
+                    <p className="text-[10px] font-mono text-red-500 flex items-center gap-1 mt-0.5">
                       <AlertCircle className="w-3 h-3" />
                       <span>{formErrors.message}</span>
                     </p>
                   )}
                 </div>
 
-                {/* Submit Feedback Notification */}
+                {/* Notification Result Banner */}
                 {submitResult && (
                   <div
-                    className={`p-4 rounded-2xl border text-xs space-y-2 animate-fade-in ${
+                    className={`p-3.5 rounded text-xs font-mono space-y-1.5 ${
                       submitResult.type === "success"
-                        ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-300"
-                        : "bg-red-500/10 border-red-500/30 text-red-800 dark:text-red-300"
+                        ? "bg-[#285B4A]/10 text-[#285B4A] dark:text-[#4E9A7E] border border-[#285B4A]/20"
+                        : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
                     }`}
                   >
                     <div className="flex items-start gap-2">
                       {submitResult.type === "success" ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                       ) : (
-                        <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                        <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                       )}
                       <span>{submitResult.message}</span>
                     </div>
 
                     {submitResult.mailtoLink && (
-                      <div className="pt-2 border-t border-emerald-500/20 flex items-center justify-between">
-                        <span className="text-[11px]">Buka di aplikasi email Anda:</span>
+                      <div className="pt-2 border-t border-[#285B4A]/20 flex items-center justify-between">
+                        <span className="text-[11px]">Buka di aplikasi email lokal:</span>
                         <a
                           href={submitResult.mailtoLink}
-                          className="inline-flex items-center gap-1 font-bold underline hover:text-emerald-900 dark:hover:text-emerald-200"
+                          className="font-bold underline inline-flex items-center gap-1"
                         >
                           <span>Kirim via Email Client</span>
                           <ExternalLink className="w-3 h-3" />
@@ -425,17 +410,17 @@ export function ContactSection() {
                   type="submit"
                   id="contact-submit-btn"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-xl text-xs font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 disabled:opacity-60 text-white shadow-lg shadow-sky-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 px-4 rounded text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] hover:bg-[#285B4A] dark:hover:bg-[#4E9A7E] transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Mengirim Pesan...</span>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Memproses Pengiriman...</span>
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
-                      <span>Kirim Pesan Sekarang</span>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Kirim Pesan Diskusi</span>
                     </>
                   )}
                 </button>

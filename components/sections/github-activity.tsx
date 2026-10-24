@@ -5,11 +5,7 @@ import { GitHubStats } from "@/types/portfolio";
 import {
   Star,
   GitFork,
-  BookMarked,
   ExternalLink,
-  Sparkles,
-  Code2,
-  Users,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 
@@ -46,111 +42,118 @@ export function GitHubActivitySection() {
   }, []);
 
   return (
-    <section id="github" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section
+      id="github"
+      aria-label="Aktivitas GitHub"
+      className="py-20 sm:py-28 border-b border-[#DEDDD7] dark:border-[#30302D]"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400 bg-sky-500/10 border border-sky-500/20">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Open Source & Kode</span>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-8 border-b border-[#DEDDD7] dark:border-[#30302D] gap-4">
+          <div>
+            <span className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] uppercase font-bold tracking-wider">
+              06 / OPEN SOURCE & REPOSITORIES
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#171717] dark:text-[#F2F0EA] mt-1">
+              Repositori & Aktivitas Kode
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Aktivitas & Repositori GitHub
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-            Eksplorasi kontribusi kode terbuka, proyek eksperimental, dan modul web yang saya bagikan di
-            platform GitHub.
+          <p className="text-xs font-mono text-[#70706C] dark:text-[#A5A39D] max-w-xs">
+            Koleksi repositori publik, arsitektur modul web, dan eksplorasi teknis di GitHub.
           </p>
         </div>
 
-        {/* GitHub Overview Box */}
-        <div className="mt-12 max-w-5xl mx-auto">
+        {/* Content Box */}
+        <div className="mt-8">
           {loading ? (
-            <div className="p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 animate-pulse space-y-6">
+            <div className="p-8 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] animate-pulse space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-slate-300 dark:bg-slate-800" />
+                <div className="w-12 h-12 rounded bg-[#EFEFEA] dark:bg-[#252524]" />
                 <div className="space-y-2">
-                  <div className="w-32 h-4 bg-slate-300 dark:bg-slate-800 rounded" />
-                  <div className="w-48 h-3 bg-slate-200 dark:bg-slate-800/60 rounded" />
+                  <div className="w-32 h-3.5 bg-[#EFEFEA] dark:bg-[#252524] rounded" />
+                  <div className="w-48 h-3 bg-[#EFEFEA] dark:bg-[#252524] rounded" />
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="h-20 bg-slate-200 dark:bg-slate-800/40 rounded-2xl" />
-                <div className="h-20 bg-slate-200 dark:bg-slate-800/40 rounded-2xl" />
-                <div className="h-20 bg-slate-200 dark:bg-slate-800/40 rounded-2xl" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="h-16 bg-[#EFEFEA] dark:bg-[#252524] rounded" />
+                <div className="h-16 bg-[#EFEFEA] dark:bg-[#252524] rounded" />
+                <div className="h-16 bg-[#EFEFEA] dark:bg-[#252524] rounded" />
+                <div className="h-16 bg-[#EFEFEA] dark:bg-[#252524] rounded" />
               </div>
             </div>
           ) : stats ? (
-            <div className="space-y-8">
-              {/* Profile Card Banner */}
-              <div className="p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div className="flex items-center gap-4 text-center sm:text-left">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-950 p-1 shadow-md border border-slate-700/50 flex items-center justify-center text-white shrink-0">
-                    <GithubIcon className="w-8 h-8 text-white" />
+            <div className="space-y-6">
+              {/* Profile Banner */}
+              <div className="p-6 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded border border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] flex items-center justify-center text-[#171717] dark:text-[#F2F0EA] shrink-0">
+                    <GithubIcon className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                        @{stats.username}
+                      <h3 className="font-bold text-sm text-[#171717] dark:text-[#F2F0EA]">
+                        github.com/{stats.username}
                       </h3>
                       {isLiveSource && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#285B4A]/10 dark:bg-[#4E9A7E]/10 text-[#285B4A] dark:text-[#4E9A7E] font-medium">
                           Live Sync
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-md">
+                    <p className="text-xs text-[#70706C] dark:text-[#A5A39D] mt-0.5">
                       {stats.bio}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <a
-                    href={stats.profileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 transition-all shadow-sm"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span>Buka Profil GitHub</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
+                <a
+                  href={stats.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-mono font-medium border border-[#DEDDD7] dark:border-[#30302D] bg-transparent text-[#171717] dark:text-[#F2F0EA] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors shrink-0"
+                >
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  <span>Kunjungi Profil</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
 
-              {/* Stats Bar */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 text-center">
-                  <BookMarked className="w-4 h-4 text-sky-500 mx-auto mb-1" />
-                  <div className="text-xl font-bold text-slate-900 dark:text-white">
+              {/* Stats Row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="p-4 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+                  <div className="text-xl font-bold font-mono text-[#171717] dark:text-[#F2F0EA]">
                     {stats.publicRepos}
                   </div>
-                  <div className="text-[11px] font-mono text-slate-500">Public Repositories</div>
+                  <div className="text-[11px] font-mono text-[#70706C] dark:text-[#A5A39D] mt-0.5">
+                    Public Repos
+                  </div>
                 </div>
 
-                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 text-center">
-                  <Users className="w-4 h-4 text-indigo-500 mx-auto mb-1" />
-                  <div className="text-xl font-bold text-slate-900 dark:text-white">
+                <div className="p-4 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+                  <div className="text-xl font-bold font-mono text-[#171717] dark:text-[#F2F0EA]">
                     {stats.followers}
                   </div>
-                  <div className="text-[11px] font-mono text-slate-500">Followers</div>
+                  <div className="text-[11px] font-mono text-[#70706C] dark:text-[#A5A39D] mt-0.5">
+                    Followers
+                  </div>
                 </div>
 
-                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 text-center">
-                  <Code2 className="w-4 h-4 text-emerald-500 mx-auto mb-1" />
-                  <div className="text-xl font-bold text-slate-900 dark:text-white">
+                <div className="p-4 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+                  <div className="text-xl font-bold font-mono text-[#171717] dark:text-[#F2F0EA]">
                     TypeScript
                   </div>
-                  <div className="text-[11px] font-mono text-slate-500">Bahasa Utama</div>
+                  <div className="text-[11px] font-mono text-[#70706C] dark:text-[#A5A39D] mt-0.5">
+                    Bahasa Dominan
+                  </div>
                 </div>
 
-                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 text-center">
-                  <Star className="w-4 h-4 text-amber-500 mx-auto mb-1" />
-                  <div className="text-xl font-bold text-slate-900 dark:text-white">
-                    Active
+                <div className="p-4 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19]">
+                  <div className="text-xl font-bold font-mono text-[#285B4A] dark:text-[#4E9A7E]">
+                    Aktif
                   </div>
-                  <div className="text-[11px] font-mono text-slate-500">Status Kontribusi</div>
+                  <div className="text-[11px] font-mono text-[#70706C] dark:text-[#A5A39D] mt-0.5">
+                    Status Aktivitas
+                  </div>
                 </div>
               </div>
 
@@ -162,37 +165,34 @@ export function GitHubActivitySection() {
                     href={repo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 hover:border-sky-500/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                    className="p-5 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors flex flex-col justify-between group"
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <BookMarked className="w-4 h-4 text-sky-500 shrink-0" />
-                          <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors truncate">
-                            {repo.name}
-                          </h4>
-                        </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-500 shrink-0" />
+                      <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#DEDDD7]/50 dark:border-[#30302D]/50">
+                        <h4 className="font-mono text-xs font-bold text-[#171717] dark:text-[#F2F0EA] group-hover:text-[#285B4A] dark:group-hover:text-[#4E9A7E] transition-colors truncate">
+                          {repo.name}
+                        </h4>
+                        <ExternalLink className="w-3 h-3 text-[#70706C] dark:text-[#A5A39D] group-hover:text-[#171717] dark:group-hover:text-[#F2F0EA] shrink-0" />
                       </div>
 
-                      <p className="mt-2.5 text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                      <p className="mt-2.5 text-xs text-[#70706C] dark:text-[#A5A39D] line-clamp-2 leading-relaxed">
                         {repo.description}
                       </p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
-                      <span className="flex items-center gap-1.5 font-medium">
-                        <span className="w-2 h-2 rounded-full bg-sky-500 inline-block" />
+                    <div className="mt-4 pt-2.5 border-t border-[#DEDDD7]/40 dark:border-[#30302D]/40 flex items-center justify-between text-[11px] font-mono text-[#70706C] dark:text-[#A5A39D]">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-[#285B4A] dark:bg-[#4E9A7E]" />
                         <span>{repo.language}</span>
                       </span>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2.5">
                         <span className="flex items-center gap-1">
-                          <Star className="w-3 h-3 text-amber-500" />
+                          <Star className="w-3 h-3 text-[#70706C] dark:text-[#A5A39D]" />
                           <span>{repo.stars}</span>
                         </span>
                         <span className="flex items-center gap-1">
-                          <GitFork className="w-3 h-3 text-slate-400" />
+                          <GitFork className="w-3 h-3 text-[#70706C] dark:text-[#A5A39D]" />
                           <span>{repo.forks}</span>
                         </span>
                       </div>

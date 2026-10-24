@@ -6,12 +6,12 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const navItems = [
-  { label: "Home", href: "#hero" },
+  { label: "Overview", href: "#hero" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "GitHub", href: "#github" },
+  { label: "Journey", href: "#experience" },
+  { label: "Code", href: "#github" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -25,7 +25,7 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 20);
 
       const sections = navItems.map((item) => item.href.substring(1));
-      const scrollPos = window.scrollY + 200;
+      const scrollPos = window.scrollY + 160;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const sec = document.getElementById(sections[i]);
@@ -46,7 +46,7 @@ export function Navbar() {
     const targetId = href.replace("#", "");
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth",
@@ -77,37 +77,35 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "glass shadow-sm dark:shadow-slate-950/40 py-3"
-          : "bg-transparent py-4 sm:py-5"
+          ? "bg-[#F7F6F2]/90 dark:bg-[#141414]/90 backdrop-blur-md border-b border-[#DEDDD7] dark:border-[#30302D] py-3"
+          : "bg-transparent py-4 sm:py-5 border-b border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo / Monogram */}
+          {/* Developer Wordmark */}
           <Link
             href="#hero"
             onClick={(e) => scrollToSection(e, "#hero")}
-            className="group flex items-center gap-2.5 font-bold tracking-tight text-slate-900 dark:text-white"
+            className="group flex items-baseline gap-2 text-[#171717] dark:text-[#F2F0EA]"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform duration-200">
-              <span className="font-mono text-base font-black tracking-tighter">K.</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-extrabold tracking-wider leading-none">
-                KOMARUDIN
-              </span>
-              <span className="text-[10px] text-sky-600 dark:text-sky-400 font-mono tracking-wider uppercase font-semibold">
-                Full-Stack Dev
-              </span>
-            </div>
+            <span className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] font-bold">
+              01
+            </span>
+            <span className="font-bold tracking-tight text-sm uppercase">
+              Komarudin
+            </span>
+            <span className="hidden sm:inline font-mono text-[10px] text-[#70706C] dark:text-[#A5A39D] tracking-wider uppercase">
+              / Full-Stack
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav
             aria-label="Navigasi Utama"
-            className="hidden md:flex items-center gap-1 rounded-full px-4 py-1.5 border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-xs"
+            className="hidden md:flex items-center gap-1 border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF]/80 dark:bg-[#1A1A19]/80 backdrop-blur-sm rounded-lg px-2 py-1"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
@@ -116,99 +114,91 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => scrollToSection(e, item.href)}
-                  className={`relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-colors duration-200 ${
+                  className={`relative px-3 py-1.5 text-xs font-mono transition-colors duration-150 rounded ${
                     isActive
-                      ? "text-sky-600 dark:text-sky-400 font-semibold"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                      ? "text-[#171717] dark:text-[#F2F0EA] font-semibold bg-[#EFEFEA] dark:bg-[#252524]"
+                      : "text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA]"
                   }`}
                 >
-                  {isActive && (
-                    <span className="absolute inset-0 rounded-full bg-sky-500/10 dark:bg-sky-400/10 -z-10 animate-fade-in" />
-                  )}
                   {item.label}
                 </a>
               );
             })}
           </nav>
 
-          {/* Right actions: ThemeToggle + CTA button */}
+          {/* Right actions: ThemeToggle + Minimal CTA button */}
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
               id="navbar-cta-btn"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white shadow-sm shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 transition-all duration-200"
+              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-md text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] hover:bg-[#285B4A] dark:hover:bg-[#4E9A7E] dark:hover:text-[#141414] transition-colors"
             >
-              <span>Hubungi Saya</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <span>Contact</span>
+              <ArrowUpRight className="w-3 h-3" />
             </a>
           </div>
 
-          {/* Mobile menu trigger button */}
+          {/* Mobile menu trigger */}
           <div className="flex md:hidden items-center gap-2">
             <ThemeToggle />
             <button
               type="button"
               id="mobile-menu-btn"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 active:scale-95"
-              aria-label={isMobileMenuOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
+              className="p-1.5 rounded-md border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#171717] dark:text-[#F2F0EA] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#285B4A]"
+              aria-label={isMobileMenuOpen ? "Tutup menu" : "Buka menu navigasi"}
               aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-slate-800 dark:text-slate-100" />
+                <X className="w-4 h-4" />
               ) : (
-                <Menu className="w-5 h-5 text-slate-800 dark:text-slate-100" />
+                <Menu className="w-4 h-4" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu & Overlay */}
+      {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop Blur */}
           <div
             onClick={() => setIsMobileMenuOpen(false)}
-            className="md:hidden fixed inset-0 top-[65px] bg-slate-950/60 backdrop-blur-sm z-40 transition-opacity"
+            className="md:hidden fixed inset-0 top-[57px] bg-black/40 backdrop-blur-xs z-40 transition-opacity"
             aria-hidden="true"
           />
 
-          {/* Drawer Content */}
-          <div className="md:hidden relative z-50 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl px-5 pt-3 pb-8 transition-all duration-300 shadow-2xl">
-            <div className="flex flex-col space-y-2 max-w-sm mx-auto">
-              {navItems.map((item) => {
+          <div className="md:hidden relative z-50 border-b border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] px-5 py-4 transition-all shadow-lg">
+            <div className="flex flex-col space-y-1">
+              {navItems.map((item, idx) => {
                 const isActive = activeSection === item.href.substring(1);
                 return (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={(e) => scrollToSection(e, item.href)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-semibold transition-all active:scale-[0.98] min-h-[48px] ${
+                    className={`flex items-center justify-between px-3 py-2.5 rounded text-xs font-mono transition-colors ${
                       isActive
-                        ? "bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20"
-                        : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent"
+                        ? "bg-[#EFEFEA] dark:bg-[#1C1C1B] text-[#171717] dark:text-[#F2F0EA] font-semibold"
+                        : "text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA]"
                     }`}
                   >
-                    <span>{item.label}</span>
-                    <ArrowUpRight className={`w-4 h-4 ${isActive ? "text-sky-500" : "text-slate-400"}`} />
+                    <span>0{idx + 1}. {item.label}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                   </a>
                 );
               })}
 
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex flex-col gap-3">
+              <div className="pt-3 mt-2 border-t border-[#DEDDD7] dark:border-[#30302D] flex flex-col gap-2">
                 <a
                   href="#contact"
                   onClick={(e) => scrollToSection(e, "#contact")}
-                  className="w-full text-center py-3.5 rounded-2xl text-sm font-bold bg-gradient-to-r from-sky-500 to-indigo-600 text-white shadow-lg shadow-sky-500/25 active:scale-95"
+                  className="w-full text-center py-2.5 rounded text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414]"
                 >
-                  Hubungi Saya Sekarang
+                  Hubungi Sekarang →
                 </a>
-                <p className="text-center text-[11px] text-slate-500 font-mono">
-                  ● Status: Open to Opportunities
-                </p>
               </div>
             </div>
           </div>

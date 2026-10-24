@@ -15,10 +15,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   if (!mounted) {
     return (
       <div
-        className={`w-9 h-9 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 flex items-center justify-center opacity-60 ${className}`}
+        className={`w-8 h-8 rounded-md border border-[#DEDDD7] dark:border-[#30302D] bg-transparent opacity-50 flex items-center justify-center ${className}`}
         aria-hidden="true"
       >
-        <span className="w-4 h-4" />
+        <span className="w-3.5 h-3.5" />
       </div>
     );
   }
@@ -30,14 +30,14 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       type="button"
       id="theme-toggle-btn"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className={`relative inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-300 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 ${className}`}
-      title={isDark ? "Beralih ke Light Mode" : "Beralih ke Dark Mode"}
+      className={`relative inline-flex items-center justify-center w-8 h-8 rounded-md border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#171717] dark:text-[#F2F0EA] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#285B4A] dark:focus-visible:ring-[#4E9A7E] cursor-pointer ${className}`}
+      title={isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"}
       aria-label="Toggle tema gelap atau terang"
     >
       {isDark ? (
-        <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-90" />
+        <Sun className="w-3.5 h-3.5 text-[#A5A39D] hover:text-[#F2F0EA] transition-colors" />
       ) : (
-        <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 hover:-rotate-12" />
+        <Moon className="w-3.5 h-3.5 text-[#70706C] hover:text-[#171717] transition-colors" />
       )}
     </button>
   );

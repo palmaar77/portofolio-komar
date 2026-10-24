@@ -20,117 +20,118 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-slate-200 dark:border-slate-800/80 bg-white/50 dark:bg-slate-950/70 backdrop-blur-md pt-14 sm:pt-16 pb-24 md:pb-12 pb-safe overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-sky-500/5 to-transparent blur-2xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-200 dark:border-slate-800/60">
-          {/* Brand & Bio */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-sm font-mono font-bold text-sm">
-                K.
-              </div>
-              <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
+    <footer className="relative border-t border-[#DEDDD7] dark:border-[#30302D] bg-[#F7F6F2] dark:bg-[#141414] pt-14 pb-24 md:pb-14 pb-safe">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-[#DEDDD7] dark:border-[#30302D]">
+          {/* Col 1: Identity & Statement */}
+          <div className="md:col-span-6 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] font-bold">
+                08
+              </span>
+              <span className="font-bold tracking-tight text-sm uppercase text-[#171717] dark:text-[#F2F0EA]">
                 {profileData.name}
               </span>
+              <span className="font-mono text-[10px] text-[#70706C] dark:text-[#A5A39D] uppercase">
+                / {profileData.role}
+              </span>
             </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
-              Full-Stack Developer yang fokus pada pembangunan solusi web modern, performa tinggi,
-              dan arsitektur yang scalable. Mengintegrasikan frontend interaktif dan backend andal.
+
+            <p className="text-xs text-[#70706C] dark:text-[#A5A39D] max-w-md leading-relaxed">
+              Studio rekayasa web personal. Berfokus pada perancangan arsitektur web modern, keandalan REST API, dan antarmuka reaktif yang responsif dan terstandar.
             </p>
-            <div className="flex items-center gap-3 pt-2">
+
+            <div className="pt-2 flex items-center gap-2 text-xs font-mono">
               <a
                 href={profileData.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/70 hover:border-sky-500 hover:text-sky-500 text-slate-700 dark:text-slate-300 flex items-center justify-center transition-all duration-200"
+                className="p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors"
                 aria-label="GitHub Profile"
               >
-                <GithubIcon className="w-4 h-4" />
+                <GithubIcon className="w-3.5 h-3.5" />
               </a>
+
               <a
                 href={profileData.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/70 hover:border-pink-500 hover:text-pink-500 text-slate-700 dark:text-slate-300 flex items-center justify-center transition-all duration-200"
+                className="p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors"
                 aria-label="Instagram Profile"
               >
-                <InstagramIcon className="w-4 h-4" />
+                <InstagramIcon className="w-3.5 h-3.5" />
               </a>
+
               <a
                 href={profileData.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/70 hover:border-sky-500 hover:text-sky-500 text-slate-700 dark:text-slate-300 flex items-center justify-center transition-all duration-200"
-                aria-label="Website Sekolah SD"
+                className="p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors"
+                aria-label="Live Demo Website Sekolah"
               >
-                <Globe className="w-4 h-4" />
+                <Globe className="w-3.5 h-3.5" />
               </a>
+
               <a
                 href={`mailto:${profileData.email}`}
-                className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/70 hover:border-sky-500 hover:text-sky-500 text-slate-700 dark:text-slate-300 flex items-center justify-center transition-all duration-200"
+                className="p-1.5 rounded border border-[#DEDDD7] dark:border-[#30302D] hover:border-[#171717] dark:hover:border-[#F2F0EA] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors"
                 aria-label="Kirim Email"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
 
-          {/* Quick Nav Links */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-900 dark:text-slate-200 font-semibold">
-              Navigasi Halaman
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          {/* Col 2: Navigation Links */}
+          <div className="md:col-span-3 space-y-2">
+            <span className="font-mono text-[10px] uppercase text-[#171717] dark:text-[#F2F0EA] font-bold tracking-wider">
+              NAVIGASI
+            </span>
+            <ul className="space-y-1.5 text-xs font-mono text-[#70706C] dark:text-[#A5A39D]">
               <li>
-                <a href="#hero" className="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                  Home
+                <a href="#hero" className="hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors">
+                  01. Overview
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                  Tentang Saya
+                <a href="#about" className="hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors">
+                  02. About
                 </a>
               </li>
               <li>
-                <a href="#skills" className="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                  Tech Stack & Skills
+                <a href="#skills" className="hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors">
+                  03. Skills
                 </a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                  Featured Projects
+                <a href="#projects" className="hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors">
+                  04. Projects
                 </a>
               </li>
               <li>
-                <a href="#experience" className="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                  Timeline Perjalanan
+                <a href="#experience" className="hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors">
+                  05. Journey
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                  Hubungi Saya
+                <a href="#contact" className="hover:text-[#171717] dark:hover:text-[#F2F0EA] transition-colors">
+                  07. Contact
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Direct Contact info & Top button */}
-          <div className="space-y-3 flex flex-col justify-between">
+          {/* Col 3: Direct info & Scroll to Top */}
+          <div className="md:col-span-3 space-y-3 flex flex-col justify-between">
             <div>
-              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-900 dark:text-slate-200 font-semibold">
-                Kontak Langsung
-              </h4>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 break-all">
-                {profileData.email}
+              <span className="font-mono text-[10px] uppercase text-[#171717] dark:text-[#F2F0EA] font-bold tracking-wider">
+                LOKASI & STATUS
+              </span>
+              <p className="mt-1 text-xs font-mono text-[#70706C] dark:text-[#A5A39D]">
+                {profileData.location} (WIB / UTC+7)
               </p>
-              <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-1">
+              <p className="text-xs font-mono text-[#285B4A] dark:text-[#4E9A7E] mt-0.5">
                 ● {profileData.status.label}
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">
-                Lokasi: {profileData.location}
               </p>
             </div>
 
@@ -138,21 +139,19 @@ export function Footer() {
               type="button"
               id="back-to-top-btn"
               onClick={scrollToTop}
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/70 hover:border-sky-500 text-slate-700 dark:text-slate-300 transition-all duration-200 self-start"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] text-[#70706C] dark:text-[#A5A39D] hover:text-[#171717] dark:hover:text-[#F2F0EA] hover:border-[#171717] dark:hover:border-[#F2F0EA] transition-colors self-start cursor-pointer"
               aria-label="Kembali ke atas halaman"
             >
-              <ArrowUp className="w-3.5 h-3.5 text-sky-500" />
-              <span>Kembali ke Atas</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+              <span>Back to Top</span>
             </button>
           </div>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-500">
-          <p>© {currentYear} {profileData.name} ({profileData.username}). Hak Cipta Dilindungi.</p>
-          <p className="flex items-center gap-1">
-            Built with Next.js App Router, TypeScript & Tailwind CSS
-          </p>
+        {/* Bottom Colophon */}
+        <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[11px] font-mono text-[#70706C] dark:text-[#A5A39D]">
+          <p>© {currentYear} {profileData.name} ({profileData.username}).</p>
+          <p>BUILT WITH NEXT.JS 16 • TYPESCRIPT 5 • TAILWIND CSS</p>
         </div>
       </div>
     </footer>

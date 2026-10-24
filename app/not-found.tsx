@@ -1,33 +1,29 @@
 import Link from "next/link";
-import { Home, Compass } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 text-center">
-      <div className="max-w-md w-full space-y-6">
-        <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white mx-auto shadow-xl shadow-sky-500/20">
-          <Compass className="w-8 h-8 animate-spin" style={{ animationDuration: "12s" }} />
+    <main className="min-h-screen flex items-center justify-center bg-[#F7F6F2] dark:bg-[#141414] px-4 text-center editorial-grid">
+      <div className="max-w-md w-full p-8 rounded-lg border border-[#DEDDD7] dark:border-[#30302D] bg-[#FFFFFF] dark:bg-[#1A1A19] space-y-5">
+        <div className="font-mono text-xs text-[#285B4A] dark:text-[#4E9A7E] font-bold tracking-widest uppercase">
+          ERROR 404 // ROUTE_NOT_FOUND
         </div>
 
         <div className="space-y-2">
-          <span className="text-xs font-mono font-bold tracking-widest text-sky-500 uppercase">
-            Error 404
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#171717] dark:text-[#F2F0EA] tracking-tight">
             Halaman Tidak Ditemukan
           </h1>
-          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            Halaman yang Anda tuju mungkin telah dipindahkan, dihapus, atau alamat URL yang dimasukkan
-            kurang tepat.
+          <p className="text-xs text-[#70706C] dark:text-[#A5A39D] leading-relaxed">
+            Halaman yang Anda tuju mungkin telah dipindahkan, dinonaktifkan, atau alamat URL yang dimasukkan kurang tepat.
           </p>
         </div>
 
-        <div className="pt-2 flex items-center justify-center gap-3">
+        <div className="pt-2 flex justify-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-sky-500 hover:bg-sky-600 text-white shadow-md shadow-sky-500/25 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded text-xs font-mono font-medium bg-[#171717] dark:bg-[#F2F0EA] text-[#F7F6F2] dark:text-[#141414] hover:bg-[#285B4A] dark:hover:bg-[#4E9A7E] transition-colors"
           >
-            <Home className="w-4 h-4" />
+            <ArrowLeft className="w-3.5 h-3.5" />
             <span>Kembali ke Beranda</span>
           </Link>
         </div>

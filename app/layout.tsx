@@ -21,8 +21,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://website-sekolah-sd.
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
-    { media: "(prefers-color-scheme: dark)", color: "#090d16" },
+    { media: "(prefers-color-scheme: light)", color: "#F7F6F2" },
+    { media: "(prefers-color-scheme: dark)", color: "#141414" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -127,7 +127,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 antialiased selection:bg-sky-500 selection:text-white transition-colors duration-300">
+      <body className="min-h-full flex flex-col bg-[#F7F6F2] dark:bg-[#141414] text-[#171717] dark:text-[#F2F0EA] antialiased selection:bg-[#285B4A] selection:text-white dark:selection:bg-[#4E9A7E] dark:selection:text-[#141414] transition-colors duration-250">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <Navbar />
           <div className="flex-1">{children}</div>
